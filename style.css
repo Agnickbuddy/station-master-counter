@@ -1,0 +1,130 @@
+/* Root reset & base: ensure consistent box sizing and remove default spacing from all elements */
+* {
+  box-sizing: border-box; /* include padding/border in element width calculations to avoid surprises */
+  margin: 0;              /* remove browser default margins */
+  padding: 0;             /* remove browser default padding */
+}
+
+body {
+  min-height: 100vh; /* ensure body at least fills full viewport height */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* performant, native-looking font stack */
+  font-weight: 700; /* make text bold for emphasis (headings/status) */
+  text-align: center; /* center all inline text/content by default */
+  color: #ffffff; /* white text for contrast against darkened background */
+  background: 
+    linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), /* semi-transparent overlay to darken background for readability */
+    url('00_MG_.jpg') center center / cover no-repeat fixed; 
+    /* background image centered; 'cover' scales it to fill without distortion;
+       'no-repeat' prevents tiling; 'fixed' keeps image stationary during scroll */
+  display: flex; /* use flexbox to easily center and stack children vertically */
+  flex-direction: column; /* stack content top-to-bottom */
+  align-items: center; /* horizontally center child elements */
+  padding: 2rem 1rem; /* breathing room on all sides */
+  gap: 1.5rem; /* vertical spacing between direct children */
+}
+
+/* Responsive heading sizing without extra media queries */
+h1 {
+  font-size: clamp(3.5rem, 6vw, 5.5rem); 
+  /* clamps font between 3.5rem and 5.5rem while scaling with viewport width (6vw) */
+  margin-top: 10px; /* space above heading */
+  font-weight: 900;
+  background: linear-gradient(90deg, #f459ff 0%, #ffa751 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 3px;
+  text-shadow: 0 4px 24px rgba(255, 204, 51, 0.25), 0 2px 8px rgba(0,0,0,0.18);
+  border-radius: 8px;
+}
+
+h2 {
+  font-size: clamp(2.5rem, 5vw, 4rem); 
+  /* larger heading, responsive between 2.5rem and 4rem */
+  margin: 1rem 0; /* vertical spacing above and below */
+}
+
+/* Button base styling for clarity and interactivity */
+button {
+  background: linear-gradient(90deg, #f1e9de 0%, #eae7de 100%); /* gold gradient */
+  color: #222;
+  border: none;
+  padding: 0.85rem 2rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 800; /* bolder */
+  letter-spacing: 1px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.18);
+  margin: 0;
+  width: auto;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s, background 0.3s;
+ 
+  
+}
+button:hover {
+  transform: scale(1.07) translateY(-2px) rotate(-1deg);
+  box-shadow: 0 16px 40px rgba(255, 204, 51, 0.25), 0 12px 30px rgba(0,0,0,0.25);
+  background: linear-gradient(90deg, #ffe259 0%, #ffa751 100%);
+}
+button:active {
+  transform: scale(0.97) translateY(1px);
+  box-shadow: 0 2px 8px rgba(255, 204, 51, 0.18), 0 2px 8px rgba(0,0,0,0.18);
+  background: linear-gradient(90deg, #ffb347 0%, #ffcc33 100%);
+}
+
+/* Counter “skin” card: translucent, readable panel over background */
+.counter-card {
+  background: rgba(255, 255, 255, 0.15); /* semi-transparent white to distinguish from background */
+  -webkit-backdrop-filter: blur(10px); /* blur behind (Safari) for frosted glass effect */
+  backdrop-filter: blur(10px); /* blur behind for modern translucent look */
+  border: 2px solid rgba(255,255,255,0.3); /* subtle border to define edges */
+  padding: 1.25rem 2rem; /* internal spacing */
+  border-radius: 20px; /* rounded for soft UI */
+  max-width: 360px; /* prevent overly wide card on large screens */
+  width: 100%; /* allow shrinking on smaller screens */
+  display: inline-flex; /* flex container but shrink to content size if needed */
+  flex-direction: column; /* stack counter number and label vertically */
+  align-items: center; /* center contents horizontally */
+  gap: 0.5rem; /* spacing between number and label/button */
+}
+
+.counter-number {
+  font-size: clamp(2rem, 4vw, 5rem); /* responsive large number display */
+  font-weight: 900; /* extra bold to draw attention */
+  letter-spacing: 1px; /* slight spacing for visual weight */
+}
+
+.counter-label {
+  font-size: 1rem; /* standard label size */
+  text-transform: uppercase; /* all caps for semantic small header */
+  letter-spacing: 2px; /* spacing to make label feel distinct and spaced */
+}
+.click {
+  font-size: 1.2rem;
+  font-weight: 700; /* bold for all buttons in row */
+  font: 700 18px Arial, sans-serif;
+  text-transform: uppercase;
+  padding: 0.5rem 0;
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem; /* more space between buttons */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Mobile adjustments to keep UI usable on narrow viewports */
+@media (max-width: 600px) {
+  .counter-card {
+    padding: 1rem 1.5rem; /* slightly reduced padding for small screens */
+  }
+  button {
+    width: 100%; /* full-width tappable target on mobile */
+  }
+}
+
